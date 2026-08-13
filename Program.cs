@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using WebBarber.Data;
+
 namespace WebBarber
 {
     public class Program
@@ -6,9 +9,12 @@ namespace WebBarber
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // MVC
             builder.Services.AddControllersWithViews();
 
+            // Entity Framework Core + SQL Server
+            builder.Services.AddDbContext<BancoContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
