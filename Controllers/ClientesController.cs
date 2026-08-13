@@ -20,13 +20,21 @@ namespace WebBarber.Controllers
         {
             return View();
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            ClientesModel cliente =_clientesRepositorio.ListarPorId(id);
+            return View(cliente);
         }
-        public IActionResult ApagarConfirmar()
+        public IActionResult ApagarConfirmar(int id)
         {
-            return View();
+            ClientesModel cliente = _clientesRepositorio.ListarPorId(id);
+            return View(cliente);
+        }
+
+        public IActionResult Apagar(int id)
+        {
+            _clientesRepositorio.Apagar(id);
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -34,6 +42,15 @@ namespace WebBarber.Controllers
         {
 
             _clientesRepositorio.Adicionar(cliente);
+            return RedirectToAction("Index");
+
+        }
+
+        [HttpPost]
+        public IActionResult Alterar(ClientesModel clientes)
+        {
+
+            _clientesRepositorio.Atualizar(clientes);
             return RedirectToAction("Index");
 
         }
