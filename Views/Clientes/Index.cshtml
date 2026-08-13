@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<ClientesModel>
+@{
     ViewData["Title"] = "Cadastro de Clientes";
 }
 <div class="text-center">
@@ -19,42 +20,24 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Marco Silva</td>
-                <td>m.aurelio@gmail.com</td>
-                <td>51-991090369</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <a role="button" class="btn btn-primary" asp-controller="Clientes" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-warning" asp-controller="Clientes" asp-action="ApagarConfirmar">Apagar</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Junior Nascimento</td>
-                <td>j.nasci@gmail.com</td>
-                <td>51-984452314</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <a role="button" class="btn btn-primary" asp-controller="Clientes" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-warning" asp-controller="Clientes" asp-action="ApagarConfirmar">Apagar</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Aurelio Ribeiro</td>
-                <td>aurelio.ribeiro@gmail.com</td>
-                <td>51-981453582</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <a role="button" class="btn btn-primary" asp-controller="Clientes" asp-action="Editar">Editar</a>
-                        <a role="button" class="btn btn-warning" asp-controller="Clientes" asp-action="ApagarConfirmar">Apagar</a>
-                    </div>
-                </td>
-            </tr>
+            @if (Model != null & Model.Any())
+            {
+                foreach (ClientesModel clientes in Model)
+                {
+                    <tr>
+                        <th scope="row">@clientes.Id</th>
+                        <td>@clientes.Nome</td>
+                        <td>@clientes.Email</td>
+                        <td>@clientes.Celular</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a role="button" class="btn btn-primary" asp-route-id="@clientes.Id" asp-controller="Clientes" asp-action="Editar">Editar</a>
+                                <a role="button" class="btn btn-warning" asp-route-id="@clientes.Id" asp-controller="Clientes" asp-action="ApagarConfirmar">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
         </tbody>
     </table>
 </div>

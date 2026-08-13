@@ -1,12 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebBarber.Models;
+using WebBarber.Repositorio;
 
 namespace WebBarber.Controllers
 {
     public class ClientesController : Controller
     {
+        private readonly IClientesRepositorio _clientesRepositorio;
+        public ClientesController(IClientesRepositorio clientesRepositorio)
+        {
+            _clientesRepositorio = clientesRepositorio;
+        }
         public IActionResult Index()
         {
-            return View();
+            var contatos = _clientesRepositorio.BuscarTodos();
+            return View(contatos);
         }
         public IActionResult Criar()
         {
@@ -21,5 +29,13 @@ namespace WebBarber.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Criar(ClientesModel cliente)
+        {
+
+            _clientesRepositorio.Adicionar(cliente);
+            return RedirectToAction("Index");
+
+        }
     }
 }

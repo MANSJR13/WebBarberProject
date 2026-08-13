@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using WebBarber.Data;
+using WebBarber.Repositorio;
 
 namespace WebBarber
 {
@@ -17,6 +18,7 @@ namespace WebBarber
                 options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DataBase")
                 ));
+            builder.Services.AddScoped<IClientesRepositorio, ClientesRepositorio>();
 
             var app = builder.Build();
 
