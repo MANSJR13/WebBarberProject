@@ -22,7 +22,7 @@ namespace WebBarber.Controllers
         }
         public IActionResult Editar(int id)
         {
-            ClientesModel cliente =_clientesRepositorio.ListarPorId(id);
+            ClientesModel cliente = _clientesRepositorio.ListarPorId(id);
             return View(cliente);
         }
         public IActionResult ApagarConfirmar(int id)
@@ -33,26 +33,67 @@ namespace WebBarber.Controllers
 
         public IActionResult Apagar(int id)
         {
-            _clientesRepositorio.Apagar(id);
-            return RedirectToAction("Index");
+            try { 
+                bool apagado = _clientesRepositorio.Apagar(id);
+                if (apagado)
+                {
+                    TempData["MensagemSucesso"] = "Cliente apagado com sucesso!";
+                }
+                else
+                {
+                    TempData["MensagemErro"] = "Ops, não conseguimos apagar seu cliente!";
+                }
+                return RedirectToAction("Index");
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos apagar seu cliente, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public IActionResult Criar(ClientesModel cliente)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _clientesRepositorio.Adicionar(cliente);
+                    TempData["MensagemSucesso"] = "Cliente cadastrado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View(cliente);
 
-            _clientesRepositorio.Adicionar(cliente);
-            return RedirectToAction("Index");
-
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos cadastrar seu cliente, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
         }
 
         [HttpPost]
         public IActionResult Alterar(ClientesModel clientes)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _clientesRepositorio.Atualizar(clientes);
+                    TempData["MensagemSucesso"] = "Cliente alterado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View("Editar", clientes);
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos alterar seu cliente, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
 
-            _clientesRepositorio.Atualizar(clientes);
-            return RedirectToAction("Index");
 
+
+            }
         }
     }
 }
