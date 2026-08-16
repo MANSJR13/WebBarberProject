@@ -91,8 +91,6 @@ namespace WebBarber.Controllers
                 TempData["MensagemErro"] = $"Ops, não conseguimos alterar seu cliente, tente novamente, detalhe do erro: {erro.Message}";
                 return RedirectToAction("Index");
 
-
-
             }
         }
     }
