@@ -11,5 +11,7 @@ namespace WebBarber.Data
 
         public DbSet<ClientesModel> Clientes { get; set; }
 
+        public DbSet<ServicosModel> Servicos { get; set; }
+
     }
 }

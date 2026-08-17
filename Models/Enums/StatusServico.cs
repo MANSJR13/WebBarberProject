@@ -1,6 +1,8 @@
 ﻿namespace WebBarber.Models.Enums
 {
-    public class StatusServico
+    public enum StatusServico
     {
+        Ativo = 1,
+        Inativo = 2,
     }
 }
