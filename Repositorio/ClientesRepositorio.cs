@@ -8,10 +8,7 @@ namespace WebBarber.Repositorio
     {
         private readonly BancoContext _bancoContext;
 
-        public List<ClientesModel> BuscarTodos()
-        {
-            return _bancoContext.Clientes.ToList();
-        }
+
         public ClientesRepositorio(BancoContext bancoContext)
         {
             _bancoContext = bancoContext;
@@ -22,7 +19,39 @@ namespace WebBarber.Repositorio
             _bancoContext.SaveChanges();
             return cliente;
         }
+        public ClientesModel ListarPorId(int id)
+        {
+            return _bancoContext.Clientes.FirstOrDefault(x => x.Id == id);
+        }
+        public List<ClientesModel> BuscarTodos()
+        {
+            return _bancoContext.Clientes.ToList();
+        }
 
-     
+        public ClientesModel Atualizar(ClientesModel cliente)
+        {
+            ClientesModel clientesDB = ListarPorId(cliente.Id);
+            if (clientesDB == null) throw new Exception("Houve um erro na atualização do cliente");
+
+            clientesDB.Nome = cliente.Nome;
+            clientesDB.Email = cliente.Email;
+            clientesDB.Celular = cliente.Celular;
+
+            _bancoContext.Clientes.Update(clientesDB);
+            _bancoContext.SaveChanges();
+
+            return clientesDB;
+        }
+
+        public bool Apagar(int id)
+        {
+            ClientesModel clientesDB = ListarPorId(id);
+            if (clientesDB == null) throw new Exception("Houve um erro na Exclusão do cliente");
+
+            _bancoContext.Clientes.Remove(clientesDB);
+            _bancoContext.SaveChanges();
+
+            return true;
+        }
     }
 }

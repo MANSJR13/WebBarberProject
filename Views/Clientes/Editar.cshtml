@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ClientesModel
+@{
     ViewData["Title"] = "Editar Cliente";
 }
 
@@ -6,19 +7,25 @@
 <div class="text-center">
     <h1 class="display-5">Editar cliente</h1>
 </div>
+
 <br />
-<form>
+
+<form asp-controller="Clientes" asp-action="Alterar" method="post">
+    <input type="hidden" asp-for="Id" />
     <div class="mb-3">
         <label for="Nome" class="form-label">Nome do cliente</label>
-        <input type="text" class="form-control" placeholder="Digite o Nome">
+        <input type="text" asp-for="Nome" class="form-control" placeholder="Digite o Nome">
+        @Html.ValidationMessageFor(x => x.Nome)
     </div>
     <div class="mb-3">
         <label for="Email" class="form-label">Email do cliente</label>
-        <input type="text" class="form-control" placeholder="Digite o Email">
+        <input type="text" asp-for="Email" class="form-control" placeholder="Digite o Email">
+        @Html.ValidationMessageFor(x => x.Email)
     </div>
     <div class="mb-3">
         <label for="Celular" class="form-label">Celular do cliente</label>
-        <input type="text" class="form-control" placeholder="Digite o Celular">
+        <input type="text" asp-for="Celular" class="form-control" placeholder="Digite o Celular">
+        @Html.ValidationMessageFor(x => x.Celular)
     </div>
 
     <button type="submit" class="btn btn-primary">Alterar cliente</button>
