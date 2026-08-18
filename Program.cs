@@ -19,6 +19,7 @@ namespace WebBarber
                     builder.Configuration.GetConnectionString("DataBase")
                 ));
             builder.Services.AddScoped<IClientesRepositorio, ClientesRepositorio>();
+            builder.Services.AddScoped<IServicosRepositorio, ServicosRepositorio>();
 
             var app = builder.Build();
 

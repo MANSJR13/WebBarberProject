@@ -13,8 +13,8 @@ namespace WebBarber.Controllers
         }
         public IActionResult Index()
         {
-            var contatos = _clientesRepositorio.BuscarTodos();
-            return View(contatos);
+            var clientes = _clientesRepositorio.BuscarTodos();
+            return View(clientes);
         }
         public IActionResult Criar()
         {
