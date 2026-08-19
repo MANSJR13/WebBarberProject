@@ -21,5 +21,34 @@ namespace WebBarber.Controllers
         {         
             return View();
         }
+        public IActionResult Editar()
+        {
+            return View();
+        }
+
+        public IActionResult Inativar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Criar(ServicosModel servico)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _servicosRepositorio.Adicionar(servico);
+                    TempData["MensagemSucesso"] = "Serviço cadastrado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View(servico);
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos cadastrar seu serviço, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+            }
+        }
     }
 }

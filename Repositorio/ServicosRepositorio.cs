@@ -19,5 +19,25 @@ namespace WebBarber.Repositorio
 
             return servico;
         }
+
+        public bool Apagar(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ServicosModel Atualizar(ServicosModel servico)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ServicosModel> BuscarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ServicosModel ListarPorId(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

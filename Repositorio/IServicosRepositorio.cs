@@ -5,6 +5,13 @@ namespace WebBarber.Repositorio
 {
     public interface IServicosRepositorio
     {
-       ServicosModel Adicionar (ServicosModel servico);
+
+        ServicosModel ListarPorId(int id);
+        List<ServicosModel> BuscarTodos();
+        ServicosModel Adicionar(ServicosModel servico);
+
+        ServicosModel Atualizar(ServicosModel servico);
+
+        bool Apagar(int id);
     }
 }

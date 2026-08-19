@@ -1,24 +1,24 @@
 ﻿@model ServicosModel
 @{
-    ViewData["Title"] = "Criar Serviço";
+    ViewData["Title"] = "Editar Serviço";
 }
 
-<h1 class="display-5">Adicionar serviço</h1>
+<h1 class="display-5">Editar serviço</h1>
 
-<form asp-controller="Servicos" asp-action="Criar" method="post">
+<form asp-controller="Servicos" asp-action="Alterar" method="post">
     <div class="mb-3">
         <label for="Nome" class="form-label">Nome</label>
-        <input type="text" asp-for="Nome" class="form-control" placeholder="Nome do serviço">
+        <input type="text" class="form-control" placeholder="Nome do serviço">
         @Html.ValidationMessageFor(x => x.Nome)
     </div>
     <div class="mb-3">
         <label for="Descricao" class="form-label">Descrição</label>
-        <input type="text" asp-for="Descricao" class="form-control" placeholder="Escolha uma descrição">
+        <input type="text" class="form-control" placeholder="Escolha uma descrição">
         @Html.ValidationMessageFor(x => x.Descricao)
     </div>
     <div class="mb-3">
         <label for="Preco" class="form-label">Preço</label>
-        <input type="text" asp-for="Preco" class="form-control" placeholder="Digite o preço">
+        <input type="text" class="form-control" placeholder="Digite o preço">
         @Html.ValidationMessageFor(x => x.Preco)
     </div>
     <div class="mb-3">
@@ -28,9 +28,9 @@
     </div>
     <div class="mb-3">
         <label for="Status" class="form-label">Status do Serviço</label>
-        <input type="text" asp-for="Status" class="form-control" placeholder="Ativo/Inativo">
+        <input type="text" class="form-control" placeholder="Ativo/Inativo">
         @Html.ValidationMessageFor(x => x.Status)
     </div>
-    <button type="submit" class="btn btn-primary">Adicionar</button>
+    <button type="submit" class="btn btn-primary">Editar</button>
     <a class="btn btn-secondary" asp-controller="Servicos" asp-action="Index" role="button">Voltar</a>
 </form>
