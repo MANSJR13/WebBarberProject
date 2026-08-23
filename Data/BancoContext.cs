@@ -13,5 +13,13 @@ namespace WebBarber.Data
 
         public DbSet<ServicosModel> Servicos { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<ServicosModel>()
+                .Property(x => x.Preco)
+                .HasPrecision(18, 2);
+        }
     }
 }
