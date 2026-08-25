@@ -32,12 +32,12 @@ namespace WebBarber.Repositorio
 
         public List<ServicosModel> BuscarTodos()
         {
-            throw new NotImplementedException();
+            return _bancoContext.Servicos.ToList(); ;
         }
 
         public ServicosModel ListarPorId(int id)
         {
-            throw new NotImplementedException();
+            return _bancoContext.Servicos.FirstOrDefault(x => x.Id == id); ;
         }
     }
 }

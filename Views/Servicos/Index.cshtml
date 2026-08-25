@@ -1,4 +1,5 @@
-﻿@{
+﻿@model List<ServicosModel>
+@{
     ViewData["Title"] = "Lista de serviços";
 }
 <div class="d-grid gap-2 d-md-flex justify-content-md-start">
@@ -19,30 +20,27 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Corte Low Fade</td>
-            <td>Cabelo</td>
-            <td>R$ 50.00</td>
-            <td>00:30</td>
-            <td>Ativo</td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Luzes</td>
-            <td>Cabelo</td>
-            <td>R$ 150.00</td>
-            <td>00:60</td>
-            <td>Ativo</td>
-        </tr>
-        <tr>
-            <th scope="row">1</th>
-            <td>Barba e Sombrancelha</td>
-            <td>Barba</td>
-            <td>R$ 60.00</td>
-            <td>00:25</td>
-            <td>Inativo</td>
-        </tr>
+        @if (Model != null & Model.Any())
+        {
+            foreach (ServicosModel servicos in Model)
+            {
+                <tr>
+                    <th scope="row">@servicos.Id</th>
+                    <td>@servicos.Nome</td>
+                    <td>@servicos.Descricao</td>
+                    <td>@servicos.Preco</td>
+                    <td>@servicos.Duracao</td>
+                    <td>@servicos.Status</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a role="button" class="btn btn-primary" asp-route-id="@servicos.Id" asp-controller="Servicos" asp-action="Editar">Editar</a>
+                            <a role="button" class="btn btn-warning" asp-route-id="@servicos.Id" asp-controller="Servicos" asp-action="ApagarConfirmar">Apagar</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+                
     </tbody>
 </table>
 

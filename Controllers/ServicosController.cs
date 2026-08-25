@@ -14,16 +14,18 @@ namespace WebBarber.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var servicos = _servicosRepositorio.BuscarTodos();
+            return View(servicos);
         }
 
         public IActionResult Criar()
         {         
             return View();
         }
-        public IActionResult Editar()
+        public IActionResult Editar(int id)
         {
-            return View();
+            var servico = _servicosRepositorio.ListarPorId(id);
+            return View(servico);
         }
 
         public IActionResult Inativar()
