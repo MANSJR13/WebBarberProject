@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebBarber.Models;
+using WebBarber.Models.Enums;
 using WebBarber.Repositorio;
 
 namespace WebBarber.Controllers
@@ -19,7 +20,7 @@ namespace WebBarber.Controllers
         }
 
         public IActionResult Criar()
-        {         
+        {
             return View();
         }
         public IActionResult Editar(int id)
@@ -28,9 +29,10 @@ namespace WebBarber.Controllers
             return View(servico);
         }
 
-        public IActionResult Inativar()
+        public IActionResult AtivarInativarConfirmacao(int id)
         {
-            return View();
+            var servico = _servicosRepositorio.ListarPorId(id);
+            return View(servico);
         }
 
         [HttpPost]
@@ -52,5 +54,27 @@ namespace WebBarber.Controllers
                 return RedirectToAction("Index");
             }
         }
-    }
+
+        [HttpPost]
+        public IActionResult AtivarInativar(int id)
+        {
+            var servico = _servicosRepositorio.ListarPorId(id);
+
+            if (servico == null)
+                return NotFound();
+
+            if (servico.Status == StatusServico.Ativo)
+            {
+                servico.Status = StatusServico.Inativo;
+            }
+            else
+            {
+                servico.Status = StatusServico.Ativo;
+            }
+
+            _servicosRepositorio.AtualizarStatus(servico);
+
+            return RedirectToAction("Index");
+        }
+    } 
 }

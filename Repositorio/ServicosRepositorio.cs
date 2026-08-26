@@ -25,9 +25,30 @@ namespace WebBarber.Repositorio
             throw new NotImplementedException();
         }
 
+       
         public ServicosModel Atualizar(ServicosModel servico)
         {
-            throw new NotImplementedException();
+            var servicoDB = ListarPorId(servico.Id);
+            servicoDB.Nome = servico.Nome;
+            servicoDB.Descricao = servico.Descricao;
+            servicoDB.Preco = servico.Preco;
+            servicoDB.Duracao = servico.Duracao;
+            servicoDB.Status = servico.Status;
+
+            _bancoContext.Servicos.Update(servicoDB);
+            _bancoContext.SaveChanges();
+
+            return servicoDB;
+        }
+        public ServicosModel AtualizarStatus(ServicosModel servico)
+        {
+            var servicoDB = ListarPorId(servico.Id);       
+            servicoDB.Status = servico.Status;
+
+            _bancoContext.Servicos.Update(servicoDB);
+            _bancoContext.SaveChanges();
+
+            return servicoDB;
         }
 
         public List<ServicosModel> BuscarTodos()
