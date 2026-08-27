@@ -1,5 +1,6 @@
 ﻿using WebBarber.Data;
 using WebBarber.Models;
+using WebBarber.Models.Enums;
 
 namespace WebBarber.Repositorio
 {
@@ -40,17 +41,7 @@ namespace WebBarber.Repositorio
 
             return servicoDB;
         }
-        public ServicosModel AtualizarStatus(ServicosModel servico)
-        {
-            var servicoDB = ListarPorId(servico.Id);       
-            servicoDB.Status = servico.Status;
-
-            _bancoContext.Servicos.Update(servicoDB);
-            _bancoContext.SaveChanges();
-
-            return servicoDB;
-        }
-
+   
         public List<ServicosModel> BuscarTodos()
         {
             return _bancoContext.Servicos.ToList(); ;

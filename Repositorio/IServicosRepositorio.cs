@@ -11,8 +11,7 @@ namespace WebBarber.Repositorio
         ServicosModel Adicionar(ServicosModel servico);
 
         ServicosModel Atualizar(ServicosModel servico);
-
-        public ServicosModel AtualizarStatus(ServicosModel servico);
+ 
         bool Apagar(int id);
     }
 }

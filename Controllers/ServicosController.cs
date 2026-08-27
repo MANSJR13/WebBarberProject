@@ -56,12 +56,14 @@ namespace WebBarber.Controllers
         }
 
         [HttpPost]
-        public IActionResult AtivarInativar(int id)
+        public IActionResult AlterarStatus(int id)
         {
             var servico = _servicosRepositorio.ListarPorId(id);
 
             if (servico == null)
+            {
                 return NotFound();
+            }
 
             if (servico.Status == StatusServico.Ativo)
             {
@@ -72,7 +74,7 @@ namespace WebBarber.Controllers
                 servico.Status = StatusServico.Ativo;
             }
 
-            _servicosRepositorio.AtualizarStatus(servico);
+            _servicosRepositorio.Atualizar(servico);
 
             return RedirectToAction("Index");
         }
