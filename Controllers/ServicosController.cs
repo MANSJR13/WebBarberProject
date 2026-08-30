@@ -29,7 +29,7 @@ namespace WebBarber.Controllers
             return View(servico);
         }
 
-        public IActionResult ExcluirConfirmacao(int id)
+        public IActionResult AtivarInativarConfirmacao(int id)
         {
             var servico = _servicosRepositorio.ListarPorId(id);
             return View(servico);

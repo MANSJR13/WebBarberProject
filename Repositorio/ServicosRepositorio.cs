@@ -21,11 +21,6 @@ namespace WebBarber.Repositorio
             return servico;
         }
 
-        public bool Apagar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
        
         public ServicosModel Atualizar(ServicosModel servico)
         {

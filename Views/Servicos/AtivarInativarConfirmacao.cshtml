@@ -1,0 +1,26 @@
+﻿@using WebBarber.Models.Enums
+@model ServicosModel
+@{
+    ViewData["Title"] = "Confirmar o ativar/inativar do serviço";
+}
+
+<div class="text-center">
+    <h1 class="display-5">Serviço atual : @Model.Status</h1>
+</div>
+<br />
+<div>
+    @if(Model.Status == StatusServico.Ativo)
+    {
+        <h3>O serviço (@Model.Nome) será inativado.</h3>
+        <h2>Tem certeza que deseja mudar o status do serviço ?</h2>
+    }
+    else
+    {
+    <h3>O serviço (@Model.Nome) será ativado.</h3>
+    <h2>Tem certeza que deseja mudar o status do serviço ?</h2>
+    }
+    
+</div>
+<br />
+<a class="btn btn-primary" asp-controller="Servicos" asp-action="AlterarStatus" asp-route-id="@Model.Id" role="button">Confirmar</a>
+<a class="btn btn-secondary" role="button" asp-controller="Servicos" asp-action="Index">Cancelar</a>
