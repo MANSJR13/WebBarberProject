@@ -29,7 +29,7 @@ namespace WebBarber.Controllers
             return View(servico);
         }
 
-        public IActionResult AtivarInativarConfirmacao(int id)
+        public IActionResult ExcluirConfirmacao(int id)
         {
             var servico = _servicosRepositorio.ListarPorId(id);
             return View(servico);
@@ -55,7 +55,7 @@ namespace WebBarber.Controllers
             }
         }
 
-        [HttpPost]
+        
         public IActionResult AlterarStatus(int id)
         {
             var servico = _servicosRepositorio.ListarPorId(id);
@@ -77,6 +77,7 @@ namespace WebBarber.Controllers
             _servicosRepositorio.Atualizar(servico);
 
             return RedirectToAction("Index");
+
         }
-    } 
+    }
 }
