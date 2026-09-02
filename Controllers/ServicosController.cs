@@ -25,7 +25,7 @@ namespace WebBarber.Controllers
         }
         public IActionResult Editar(int id)
         {
-            var servico = _servicosRepositorio.ListarPorId(id);
+            ServicosModel servico = _servicosRepositorio.ListarPorId(id);
             return View(servico);
         }
 
@@ -78,6 +78,27 @@ namespace WebBarber.Controllers
 
             return RedirectToAction("Index");
 
+        }
+
+        [HttpPost]
+        public IActionResult Alterar(ServicosModel servicos)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _servicosRepositorio.Atualizar(servicos);
+                    TempData["MensagemSucesso"] = "Serviço alterado com sucesso!";
+                    return RedirectToAction("Index");
+                }
+                return View("Editar", servicos);
+            }
+            catch (Exception erro)
+            {
+                TempData["MensagemErro"] = $"Ops, não conseguimos alterar seu serviço, tente novamente, detalhe do erro: {erro.Message}";
+                return RedirectToAction("Index");
+
+            }
         }
     }
 }

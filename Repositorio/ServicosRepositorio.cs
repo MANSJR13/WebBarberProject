@@ -39,12 +39,12 @@ namespace WebBarber.Repositorio
    
         public List<ServicosModel> BuscarTodos()
         {
-            return _bancoContext.Servicos.ToList(); ;
+            return _bancoContext.Servicos.ToList();
         }
 
         public ServicosModel ListarPorId(int id)
         {
-            return _bancoContext.Servicos.FirstOrDefault(x => x.Id == id); ;
+            return _bancoContext.Servicos.FirstOrDefault(x => x.Id == id);
         }
     }
 }
